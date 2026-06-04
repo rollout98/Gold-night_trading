@@ -1,0 +1,317 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<title>GC Session Playbook — Weekly Wall Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4efe3;--ink:#1d1a14;--gold:#b8902f;--goldL:#d8b65a;--up:#1c7a44;--dn:#b22d2d;--nt:#7a7060;--rule:#cdbf9e;}
+*{box-sizing:border-box;margin:0;padding:0} html{background:#2a2722}
+body{font-family:'IBM Plex Mono',monospace;color:var(--ink);background:var(--paper);background-image:radial-gradient(rgba(0,0,0,.025) 1px,transparent 1px);background-size:4px 4px;}
+.sheet{max-width:850px;margin:0 auto;padding:34px 40px 48px;}
+header{border-bottom:3px solid var(--ink);padding-bottom:14px;margin-bottom:6px;position:relative}
+header:after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:2px;background:var(--gold)}
+.kick{font-family:'Oswald';letter-spacing:.42em;font-size:11px;color:var(--gold);font-weight:600}
+h1{font-family:'Oswald';font-weight:700;font-size:46px;line-height:.95;letter-spacing:-.5px;text-transform:uppercase;margin:2px 0 6px}
+.subh{font-size:11.5px;color:#5b5345;display:flex;gap:18px;flex-wrap:wrap} .subh b{color:var(--ink)}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 22px;font-family:'Oswald';font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.lg{padding:4px 9px;border:1px solid var(--rule);border-radius:2px;background:#fbf8ef;display:flex;align-items:center;gap:6px}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.day{margin-bottom:18px;break-inside:avoid;page-break-inside:avoid}
+.dayhead{display:flex;align-items:baseline;gap:12px;border-bottom:1.5px solid var(--ink);margin-bottom:7px}
+.dn{font-family:'Oswald';font-weight:700;font-size:25px;text-transform:uppercase;letter-spacing:.5px}
+.dmeta{font-size:10px;color:var(--nt);letter-spacing:.1em;text-transform:uppercase}
+.sess{border:1px solid var(--rule);border-left:4px solid var(--gold);background:#fbf8ef;margin-bottom:6px;border-radius:2px;overflow:hidden}
+.sgrid{display:grid;grid-template-columns:1.05fr 1.15fr 1.2fr 1.25fr .8fr;align-items:stretch}
+.sgrid>div{padding:8px 11px;border-right:1px solid #e7dcc2} .sgrid>div:last-child{border-right:none}
+.slabel{display:flex;flex-direction:column;justify-content:center;background:#f1e9d6}
+.sname{font-family:'Oswald';font-weight:600;font-size:17px;text-transform:uppercase;letter-spacing:.04em}
+.sopen{font-size:10px;color:var(--nt)}
+.stat{display:flex;flex-direction:column;justify-content:center;gap:1px}
+.k{font-size:8px;letter-spacing:.1em;color:var(--nt);font-weight:600}
+.v{font-size:17px;font-weight:600;line-height:1.05} .stat .sub{font-size:9px;color:#6f6655;display:block}
+.stop{background:rgba(178,45,45,.06)} .stop .v{color:var(--dn);font-size:20px}
+.rel{margin-top:3px;font-family:'Oswald';font-size:8.5px;font-weight:600;letter-spacing:.05em;padding:2px 5px;border-radius:2px;width:fit-content}
+.r-hi{background:var(--up);color:#fff} .r-mid{background:var(--goldL);color:#4a3a09} .r-lo{background:var(--dn);color:#fff}
+.ticks{background:#f1e9d6;text-align:right;align-items:flex-end}
+.ticks .v{font-size:24px;font-weight:600;color:var(--ink)} .ticks small,.stop small{font-size:11px;color:var(--gold)}
+.dol{font-family:'Oswald';font-weight:700;font-size:13px;color:var(--up);margin-top:1px;letter-spacing:.02em}
+.dol.risk{color:var(--dn);font-size:11px;font-weight:600}
+.controls{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;margin:14px 0 4px;padding:11px 14px;border:1px solid var(--rule);border-left:4px solid var(--gold);background:#fbf8ef;border-radius:3px}
+.controls label{display:flex;flex-direction:column;gap:3px;font-family:'Oswald';font-weight:600;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--nt)}
+.controls select,.controls input{font-family:'IBM Plex Mono',monospace;font-size:13px;padding:5px 7px;border:1px solid var(--rule);border-radius:2px;background:#fff;color:var(--ink)}
+.controls input{width:84px}
+.controls input[readonly]{background:#f1e9d6;color:#8a7f6a}
+.ctrlnote{margin-left:auto;font-family:'Oswald';font-weight:700;font-size:12px;letter-spacing:.04em;color:var(--gold);align-self:center}
+.controls .chk{flex-direction:row;align-items:center;gap:6px;font-size:10px;color:var(--ink);align-self:center}
+.controls .chk input{width:auto}
+.sizechip{font-family:'Oswald';font-weight:700;font-size:9px;letter-spacing:.04em;padding:2px 6px;border-radius:2px;margin-top:4px;width:fit-content;text-transform:uppercase}
+.sizechip.s3{background:var(--up);color:#fff} .sizechip.s2{background:var(--goldL);color:#4a3a09}
+.runner{margin:22px 0 6px;border:2px solid var(--ink);border-radius:3px;background:#efe7d3;break-inside:avoid;page-break-inside:avoid}
+.rhead{background:var(--ink);color:var(--paper);padding:9px 14px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.rtitle{font-family:'Oswald';font-weight:700;font-size:21px;text-transform:uppercase;letter-spacing:.06em;color:var(--goldL)}
+.rsub{font-size:10.5px;color:#d8cfb8}
+.rgrid{display:grid;grid-template-columns:repeat(4,1fr);}
+.rstat{padding:9px 13px;border-right:1px solid #d8cdb0;display:flex;flex-direction:column;gap:2px}
+.rstat:last-child{border-right:none}
+.rstat .v{font-family:'Oswald';font-weight:700;font-size:18px;color:var(--ink)} .rstat .v small{font-size:11px;color:var(--gold)}
+.rstat .sub{font-size:9px;color:#6f6655}
+.rnights{display:flex;flex-wrap:wrap;gap:7px;padding:10px 13px;border-top:1px solid #d8cdb0}
+.rnight{display:flex;flex-direction:column;gap:2px;padding:6px 10px;border:1px solid var(--rule);border-radius:2px;background:#fbf8ef;min-width:104px}
+.rn-day{font-family:'Oswald';font-weight:600;font-size:13px;text-transform:uppercase}
+.rn-entry{font-family:'Oswald';font-weight:700;font-size:11px;padding:1px 5px;border-radius:2px;width:fit-content}
+.rn-entry.e-early{background:var(--up);color:#fff} .rn-entry.e-mid{background:#c9802f;color:#fff} .rn-entry.e-late{background:#e7dcc2;color:#6f6655}
+.rn-hit{font-family:'Oswald';font-weight:700;font-size:10px;padding:1px 5px;border-radius:2px;width:fit-content}
+.rn-hit.r-hi{background:var(--up);color:#fff} .rn-hit.r-mid{background:var(--goldL);color:#4a3a09} .rn-hit.r-lo{background:#e7dcc2;color:#6f6655}
+.rn-med{font-size:9px;color:#6f6655} .rn-tag{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--nt)}
+@media print{.controls{display:none}}
+.note{font-size:10px;color:#5b5345;padding:5px 11px;border-top:1px dashed #e0d4b8;background:#f7f2e6} .note b{color:var(--ink)}
+footer{margin-top:20px;border-top:2px solid var(--ink);padding-top:10px;font-size:9.5px;color:#5b5345;line-height:1.5}
+@media print{html,body{background:#fff} body{background-image:none} .sheet{max-width:none;padding:0 .3in} @page{size:Letter portrait;margin:.45in} *{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head><body><div class="sheet">
+<header>
+  <div class="kick">COMEX MICRO GOLD · MGC · ALL TIMES CT · WAIT-FOR-CONFIRMATION METHOD</div>
+  <h1>Weekly Session Playbook</h1>
+  <div class="subh"><span>Rolling 8-week read · <b>Apr 4 – May 29 2026</b></span><span>Enter after <b>50t</b> confirmation</span><span>Refreshed <b>2026-05-31</b></span></div>
+</header>
+<div class="controls">
+  <label>Contract
+    <select id="contract">
+      <option value="1" selected>MGC — Micro ($1.00/tick)</option>
+      <option value="10">GC — Standard ($10.00/tick)</option>
+      <option value="custom">Custom…</option>
+    </select>
+  </label>
+  <label>$ / tick<input id="perTick" type="number" min="0" step="0.01" value="1.00" readonly></label>
+  <label>Contracts<input id="contracts" type="number" min="1" step="1" value="1"></label>
+  <label class="chk">Auto-size 2/3<input id="autosize" type="checkbox" checked></label>
+  <span class="ctrlnote" id="ctrlnote">MGC · $1.00/tick · auto 2–3 micros</span>
+</div>
+<div class="legend">
+  <span class="lg"><span class="dot" style="background:var(--dn)"></span>STOP = heat to survive after entry (80th pct)</span>
+  <span class="lg"><span class="dot" style="background:var(--up)"></span>RELIABLE = confirmation held ≥85% of wks</span>
+  <span class="lg"><span class="dot" style="background:var(--goldL)"></span>OK = held 60–80%</span>
+  <span class="lg"><span class="dot" style="background:var(--dn)"></span>CHOPPY = held ≤55% (fakes out often)</span>
+</div>
+
+    <section class="day">
+      <div class="dayhead"><span class="dn">Sunday</span><span class="dmeta">1 session</span></div>
+      
+      <div class="sess">
+        <div class="sgrid">
+          <div class="slabel"><span class="sname">Asia</span><span class="sopen">opens 17:00</span><span class="sizechip s3">3 micros</span></div>
+          <div class="stat"><span class="k">ENTER (after 50t confirm)</span><span class="v">18:44</span><span class="sub">104 min after reopen</span></div>
+          <div class="stat"><span class="k">EXIT / PEAK</span><span class="v">≈88 min to peak</span><span class="sub"></span></div>
+          <div class="stat stop"><span class="k">STOP</span><span class="v">165<small>t</small></span><span class="dol risk" data-ticks="165" data-rec="3" data-suffix=" risk">$165 risk</span><span class="rel r-hi">RELIABLE 8/8</span></div>
+          <div class="stat ticks"><span class="k">TARGET</span><span class="v">506<small>t</small></span><span class="dol" data-ticks="506" data-rec="3">$506</span></div>
+        </div>
+        <div class="note"><b>9-10:30 PM:</b> Chop drift 56t (real chop) &nbsp;·&nbsp; <b>11 PM window:</b> 11 PM move: 116t</div>
+      </div>
+    </section>
+    <section class="day">
+      <div class="dayhead"><span class="dn">Monday</span><span class="dmeta">3 sessions</span></div>
+      
+      <div class="sess">
+        <div class="sgrid">
+          <div class="slabel"><span class="sname">London</span><span class="sopen">opens 02:00</span><span class="sizechip s3">3 micros</span></div>
+          <div class="stat"><span class="k">ENTER (after 50t confirm)</span><span class="v">03:10</span><span class="sub">70 min after 2 AM open — late start</span></div>
+          <div class="stat"><span class="k">EXIT / PEAK</span><span class="v">≈239 min to peak (4 hrs)</span><span class="sub"></span></div>
+          <div class="stat stop"><span class="k">STOP</span><span class="v">135<small>t</small></span><span class="dol risk" data-ticks="135" data-rec="3" data-suffix=" risk">$135 risk</span><span class="rel r-hi">RELIABLE 7/8</span></div>
+          <div class="stat ticks"><span class="k">TARGET</span><span class="v">288<small>t</small></span><span class="dol" data-ticks="288" data-rec="3">$288</span></div>
+        </div>
+        <div class="note"><b>Path efficiency:</b> 9.7% — NOISIEST London day &nbsp;·&nbsp; <b>Max pullback:</b> 179t — patient stops required</div>
+      </div>
+      <div class="sess">
+        <div class="sgrid">
+          <div class="slabel"><span class="sname">NY</span><span class="sopen">opens 07:00</span><span class="sizechip s2">2 micros</span></div>
+          <div class="stat"><span class="k">ENTER (after 50t confirm)</span><span class="v">07:17</span><span class="sub">17 min after 7 AM open</span></div>
+          <div class="stat"><span class="k">EXIT / PEAK</span><span class="v">11:10</span><span class="sub">1st peak 09:34</span></div>
+          <div class="stat stop"><span class="k">STOP</span><span class="v">235<small>t</small></span><span class="dol risk" data-ticks="235" data-rec="2" data-suffix=" risk">$235 risk</span><span class="rel r-mid">OK 5/8</span></div>
+          <div class="stat ticks"><span class="k">TARGET</span><span class="v">402<small>t</small></span><span class="dol" data-ticks="402" data-rec="2">$402</span></div>
+        </div>
+        <div class="note"><b>First peak:</b> 09:34 (154 min in) &nbsp;·&nbsp; <b>Reversal at:</b> 11:10 — mid-morning fade</div>
+      </div>
+      <div class="sess">
+        <div class="sgrid">
+          <div class="slabel"><span class="sname">Asia</span><span class="sopen">opens 17:00</span><span class="sizechip s3">3 micros</span></div>
+          <div class="stat"><span class="k">ENTER (after 50t confirm)</span><span class="v">18:49</span><span class="sub">109 min after reopen</span></div>
+          <div class="stat"><span class="k">EXIT / PEAK</span><span class="v">≈88 min to peak</span><span class="sub"></span></div>
+          <div class="stat stop"><span class="k">STOP</span><span class="v">70<small>t</small></span><span class="dol risk" data-ticks="70" data-rec="3" data-suffix=" risk">$70 risk</span><span class="rel r-mid">OK 5/8</span></div>
+          <div class="stat ticks"><span class="k">TARGET</span><span class="v">313<small>t</small></span><span class="dol" data-ticks="313" data-rec="3">$313</span></div>
+        </div>
+        <div class="note"><b>9-10:30 PM:</b> Chop drift 33t (real chop) &nbsp;·&nbsp; <b>11 PM window:</b> 11 PM move:  91t (smallest)</div>
+      </div>
+    </section>
+    <section class="day">
+      <div class="dayhead"><span class="dn">Tuesday</span><span class="dmeta">3 sessions</span></div>
+      
+      <div class="sess">
+        <div class="sgrid">
+          <div class="slabel"><span class="sname">London</span><span class="sopen">opens 02:00</span><span class="sizechip s2">2 micros</span></div>
+          <div class="stat"><span class="k">ENTER (after 50t confirm)</span><span class="v">02:17</span><span class="sub">17 min after open</span></div>
+          <div class="stat"><span class="k">EXIT / PEAK</span><span class="v">≈253 min to peak (4+ hrs)</span><span class="sub"></span></div>
+          <div class="stat stop"><span class="k">STOP</span><span class="v">275<small>t</small></span><span class="dol risk" data-ticks="275" data-rec="2" data-suffix=" risk">$275 risk</span><span class="rel r-lo">CHOPPY 4/8</span></div>
+          <div class="stat ticks"><span class="k">TARGET</span><span class="v">317<small>t</small></span><span class="dol" data-ticks="317" data-rec="2">$317</span></div>
+        </div>
+        <div class="note"><b>Path efficiency:</b> 16.6% — CLEANEST London day &nbsp;·&nbsp; <b>Max pullback:</b> 192t — biggest pullbacks</div>
+      </div>
+      <div class="sess">
+        <div class="sgrid">
+          <div class="slabel"><span class="sname">NY</span><span class="sopen">opens 07:00</span><span class="sizechip s3">3 micros</span></div>
+          <div class="stat"><span class="k">ENTER (after 50t confirm)</span><span class="v">07:40</span><span class="sub">40 min after open</span></div>
+          <div class="stat"><span class="k">EXIT / PEAK</span><span class="v">14:58</span><span class="sub">1st peak 09:06</span></div>
+          <div class="stat stop"><span class="k">STOP</span><span class="v">100<small>t</small></span><span class="dol risk" data-ticks="100" data-rec="3" data-suffix=" risk">$100 risk</span><span class="rel r-mid">OK 6/8</span></div>
+          <div class="stat ticks"><span class="k">TARGET</span><span class="v">611<small>t</small></span><span class="dol" data-ticks="611" data-rec="3">$611</span></div>
+        </div>
+        <div class="note"><b>First peak:</b> 09:06 (126 min in) &nbsp;·&nbsp; <b>Reversal at:</b> 14:58 — LATE reversal, wait it out</div>
+      </div>
+      <div class="sess">
+        <div class="sgrid">
+          <div class="slabel"><span class="sname">Asia</span><span class="sopen">opens 17:00</span><span class="sizechip s2">2 micros</span></div>
+          <div class="stat"><span class="k">ENTER (after 50t confirm)</span><span class="v">17:42</span><span class="sub">42 min after reopen</span></div>
+          <div class="stat"><span class="k">EXIT / PEAK</span><span class="v">≈88 min to peak</span><span class="sub"></span></div>
+          <div class="stat stop"><span class="k">STOP</span><span class="v">205<small>t</small></span><span class="dol risk" data-ticks="205" data-rec="2" data-suffix=" risk">$205 risk</span><span class="rel r-mid">OK 5/8</span></div>
+          <div class="stat ticks"><span class="k">TARGET</span><span class="v">514<small>t</small></span><span class="dol" data-ticks="514" data-rec="2">$514</span></div>
+        </div>
+        <div class="note"><b>9-10:30 PM:</b> Chop drift 124t (FAKE chop) &nbsp;·&nbsp; <b>11 PM window:</b> 11 PM move:  84t (smallest)</div>
+      </div>
+    </section>
+    <section class="day">
+      <div class="dayhead"><span class="dn">Wednesday</span><span class="dmeta">3 sessions</span></div>
+      
+      <div class="sess">
+        <div class="sgrid">
+          <div class="slabel"><span class="sname">London</span><span class="sopen">opens 02:00</span><span class="sizechip s3">3 micros</span></div>
+          <div class="stat"><span class="k">ENTER (after 50t confirm)</span><span class="v">02:13</span><span class="sub">13 min after open</span></div>
+          <div class="stat"><span class="k">EXIT / PEAK</span><span class="v">≈184 min to peak (3 hrs)</span><span class="sub"></span></div>
+          <div class="stat stop"><span class="k">STOP</span><span class="v">130<small>t</small></span><span class="dol risk" data-ticks="130" data-rec="3" data-suffix=" risk">$130 risk</span><span class="rel r-mid">OK 5/8</span></div>
+          <div class="stat ticks"><span class="k">TARGET</span><span class="v">367<small>t</small></span><span class="dol" data-ticks="367" data-rec="3">$367</span></div>
+        </div>
+        <div class="note"><b>Path efficiency:</b> 10.0% — noisy but directional &nbsp;·&nbsp; <b>Max pullback:</b> 174t — fight the noise, bias is real</div>
+      </div>
+      <div class="sess">
+        <div class="sgrid">
+          <div class="slabel"><span class="sname">NY</span><span class="sopen">opens 07:00</span><span class="sizechip s3">3 micros</span></div>
+          <div class="stat"><span class="k">ENTER (after 50t confirm)</span><span class="v">07:34</span><span class="sub">34 min after open</span></div>
+          <div class="stat"><span class="k">EXIT / PEAK</span><span class="v">11:24</span><span class="sub">1st peak 08:46</span></div>
+          <div class="stat stop"><span class="k">STOP</span><span class="v">155<small>t</small></span><span class="dol risk" data-ticks="155" data-rec="3" data-suffix=" risk">$155 risk</span><span class="rel r-mid">OK 5/8</span></div>
+          <div class="stat ticks"><span class="k">TARGET</span><span class="v">470<small>t</small></span><span class="dol" data-ticks="470" data-rec="3">$470</span></div>
+        </div>
+        <div class="note"><b>First peak:</b> 08:46 (106 min in) &nbsp;·&nbsp; <b>Reversal at:</b> 11:24 — lunchtime fade</div>
+      </div>
+      <div class="sess">
+        <div class="sgrid">
+          <div class="slabel"><span class="sname">Asia</span><span class="sopen">opens 17:00</span><span class="sizechip s3">3 micros</span></div>
+          <div class="stat"><span class="k">ENTER (after 50t confirm)</span><span class="v">18:34</span><span class="sub">94 min after reopen</span></div>
+          <div class="stat"><span class="k">EXIT / PEAK</span><span class="v">≈88 min to peak</span><span class="sub"></span></div>
+          <div class="stat stop"><span class="k">STOP</span><span class="v">165<small>t</small></span><span class="dol risk" data-ticks="165" data-rec="3" data-suffix=" risk">$165 risk</span><span class="rel r-mid">OK 5/8</span></div>
+          <div class="stat ticks"><span class="k">TARGET</span><span class="v">393<small>t</small></span><span class="dol" data-ticks="393" data-rec="3">$393</span></div>
+        </div>
+        <div class="note"><b>9-10:30 PM:</b> Chop drift 122t (FAKE chop) &nbsp;·&nbsp; <b>11 PM window:</b> 11 PM move: 116t</div>
+      </div>
+    </section>
+    <section class="day">
+      <div class="dayhead"><span class="dn">Thursday</span><span class="dmeta">3 sessions</span></div>
+      
+      <div class="sess">
+        <div class="sgrid">
+          <div class="slabel"><span class="sname">London</span><span class="sopen">opens 02:00</span><span class="sizechip s3">3 micros</span></div>
+          <div class="stat"><span class="k">ENTER (after 50t confirm)</span><span class="v">02:20</span><span class="sub">20 min after open</span></div>
+          <div class="stat"><span class="k">EXIT / PEAK</span><span class="v">≈198 min to peak (3+ hrs)</span><span class="sub"></span></div>
+          <div class="stat stop"><span class="k">STOP</span><span class="v">150<small>t</small></span><span class="dol risk" data-ticks="150" data-rec="3" data-suffix=" risk">$150 risk</span><span class="rel r-hi">RELIABLE 7/8</span></div>
+          <div class="stat ticks"><span class="k">TARGET</span><span class="v">297<small>t</small></span><span class="dol" data-ticks="297" data-rec="3">$297</span></div>
+        </div>
+        <div class="note"><b>Path efficiency:</b> 12.8% — moderate noise &nbsp;·&nbsp; <b>Max pullback:</b> 175t — Asia DOWN bias inverts here</div>
+      </div>
+      <div class="sess">
+        <div class="sgrid">
+          <div class="slabel"><span class="sname">NY</span><span class="sopen">opens 07:00</span><span class="sizechip s2">2 micros</span></div>
+          <div class="stat"><span class="k">ENTER (after 50t confirm)</span><span class="v">08:00</span><span class="sub">60 min after open — LATE</span></div>
+          <div class="stat"><span class="k">EXIT / PEAK</span><span class="v">12:40</span><span class="sub">1st peak 08:14</span></div>
+          <div class="stat stop"><span class="k">STOP</span><span class="v">260<small>t</small></span><span class="dol risk" data-ticks="260" data-rec="2" data-suffix=" risk">$260 risk</span><span class="rel r-hi">RELIABLE 7/8</span></div>
+          <div class="stat ticks"><span class="k">TARGET</span><span class="v">562<small>t</small></span><span class="dol" data-ticks="562" data-rec="2">$562</span></div>
+        </div>
+        <div class="note"><b>First peak:</b> 08:14 (74 min in) &nbsp;·&nbsp; <b>Reversal at:</b> 12:40 — lunchtime fade</div>
+      </div>
+      <div class="sess">
+        <div class="sgrid">
+          <div class="slabel"><span class="sname">Asia</span><span class="sopen">opens 17:00</span><span class="sizechip s3">3 micros</span></div>
+          <div class="stat"><span class="k">ENTER (after 50t confirm)</span><span class="v">17:01</span><span class="sub">1 min — fires at reopen</span></div>
+          <div class="stat"><span class="k">EXIT / PEAK</span><span class="v">≈88 min to peak</span><span class="sub"></span></div>
+          <div class="stat stop"><span class="k">STOP</span><span class="v">160<small>t</small></span><span class="dol risk" data-ticks="160" data-rec="3" data-suffix=" risk">$160 risk</span><span class="rel r-mid">OK 6/8</span></div>
+          <div class="stat ticks"><span class="k">TARGET</span><span class="v">318<small>t</small></span><span class="dol" data-ticks="318" data-rec="3">$318</span></div>
+        </div>
+        <div class="note"><b>9-10:30 PM:</b> Chop drift 60t (real chop) &nbsp;·&nbsp; <b>11 PM window:</b> 11 PM move: 123t (LARGEST)</div>
+      </div>
+    </section>
+    <section class="day">
+      <div class="dayhead"><span class="dn">Friday</span><span class="dmeta">2 sessions</span></div>
+      
+      <div class="sess">
+        <div class="sgrid">
+          <div class="slabel"><span class="sname">London</span><span class="sopen">opens 02:00</span><span class="sizechip s3">3 micros</span></div>
+          <div class="stat"><span class="k">ENTER (after 50t confirm)</span><span class="v">02:21</span><span class="sub">21 min after open</span></div>
+          <div class="stat"><span class="k">EXIT / PEAK</span><span class="v">≈224 min to peak</span><span class="sub"></span></div>
+          <div class="stat stop"><span class="k">STOP</span><span class="v">145<small>t</small></span><span class="dol risk" data-ticks="145" data-rec="3" data-suffix=" risk">$145 risk</span><span class="rel r-hi">RELIABLE 7/7</span></div>
+          <div class="stat ticks"><span class="k">TARGET</span><span class="v">303<small>t</small></span><span class="dol" data-ticks="303" data-rec="3">$303</span></div>
+        </div>
+        <div class="note"><b>Path efficiency:</b> 15.0% — relatively clean &nbsp;·&nbsp; <b>Max pullback:</b> 194t — biggest London pullbacks</div>
+      </div>
+      <div class="sess">
+        <div class="sgrid">
+          <div class="slabel"><span class="sname">NY</span><span class="sopen">opens 07:00</span><span class="sizechip s3">3 micros</span></div>
+          <div class="stat"><span class="k">ENTER (after 50t confirm)</span><span class="v">07:35</span><span class="sub">35 min after open</span></div>
+          <div class="stat"><span class="k">EXIT / PEAK</span><span class="v">09:12</span><span class="sub">1st peak 08:32</span></div>
+          <div class="stat stop"><span class="k">STOP</span><span class="v">95<small>t</small></span><span class="dol risk" data-ticks="95" data-rec="3" data-suffix=" risk">$95 risk</span><span class="rel r-hi">RELIABLE 8/8</span></div>
+          <div class="stat ticks"><span class="k">TARGET</span><span class="v">505<small>t</small></span><span class="dol" data-ticks="505" data-rec="3">$505</span></div>
+        </div>
+        <div class="note"><b>First peak:</b> 08:32 (92 min in) &nbsp;·&nbsp; <b>Reversal at:</b> 09:12 — VERY FAST, fade by 09:00 CT</div>
+      </div>
+    </section>
+
+<section class="runner">
+  <div class="rhead"><span class="rtitle">Runners · Overnight Hold</span><span class="rsub">trade the shown direction · hold London→NY · exit the morning · earliest entry varies by night ↓</span></div>
+  <div class="rgrid">
+    <div class="rstat"><span class="k">ENTRY RULE</span><span class="v">Shown dir</span><span class="sub">≥50t off the 5 PM reopen — time depends on the night (below)</span></div>
+    <div class="rstat"><span class="k">EXIT WINDOW</span><span class="v">7 AM–1 PM</span><span class="sub">peak ≈09:45 · 4 AM catches only ~½ the move</span></div>
+    <div class="rstat"><span class="k">RUNNER STOP · SIZE</span><span class="v">~400<small>t</small> · 2 mic</span><span class="dol risk" data-ticks="400" data-rec="2" data-suffix=" risk">$800 risk</span><span class="sub">wider than scalps; ~250t if you wait for 11 PM</span></div>
+    <div class="rstat"><span class="k">RUNNER TARGET</span><span class="v">800–1000<small>t</small></span><span class="dol" data-ticks="900" data-rec="2">$1,800</span></div>
+  </div>
+  <div class="rnights"><div class="rnight"><span class="rn-day">Sunday</span><span class="rn-entry e-early">5 PM reopen</span><span class="rn-hit r-mid">33% ≥800t</span><span class="rn-tag">early-friendly</span></div><div class="rnight"><span class="rn-day">Monday</span><span class="rn-entry e-mid">~8 PM</span><span class="rn-hit r-hi">56% ≥800t</span><span class="rn-tag">PRIME</span></div><div class="rnight"><span class="rn-day">Tuesday</span><span class="rn-entry e-early">5 PM reopen</span><span class="rn-hit r-mid">33% ≥800t</span><span class="rn-tag">huge holds</span></div><div class="rnight"><span class="rn-day">Wednesday</span><span class="rn-entry e-late">11 PM / skip</span><span class="rn-hit r-lo">22% ≥800t</span><span class="rn-tag">weakest</span></div><div class="rnight"><span class="rn-day">Thursday</span><span class="rn-entry e-mid">~8 PM</span><span class="rn-hit r-mid">40% ≥800t</span><span class="rn-tag">good</span></div></div>
+  <div class="note"><b>Earliest entry by night:</b> <b>Sun &amp; Tue</b> hold from the <b>5 PM reopen</b> — get in early. <b>Mon &amp; Thu</b> stop out at the reopen (deep early dip), so wait for <b>~8 PM</b>. <b>Wed</b> rarely holds early — 11 PM continuation or skip. <b>Monday is the prime night</b> (56% carry 800t+, often into the afternoon). Early/overnight holds need ~400t of room; the 11 PM continuation takes less heat (~250t). ~5–10 samples/night — trust the ranking over the exact %.</div>
+</section>
+<footer>
+  <b>Method:</b> Ignore the predicted direction — wait for price to clear ~50t off the session open, enter in that direction, target the listed move, stop at the listed level. <b>ENTER</b> = typical move-start once it declares. <b>EXIT/PEAK</b> = where the move tops (Asia/London) or the morning fade (NY). <b>STOP</b> = the post-entry heat that ~80% of continuing moves stayed within. <b>x/y</b> = how many recent weeks the confirmation actually continued (+100t) — your false-breakout gauge.<br>
+  <b>Position size (auto 2/3):</b> Each session is tagged <b>3 micros</b> when its stop is ≤180t and <b>2 micros</b> when wider — so the wide-stop sessions (NY Mon/Thu, London Tue, Asia Tue) don't balloon your risk. This holds dollar risk roughly even (~$200–500/trade on MGC) instead of letting it swing 4×. Uncheck <b>Auto-size</b> to set a flat contract count instead.<br>
+  <b>Dollars:</b> Each tick (0.10) = <b>$1.00</b> per MGC contract (GC is 10×). <b>STOP $</b> = risk per trade at the shown size; <b>TARGET $</b> = projected gain if it reaches the mean move (a projection, not a guarantee — peaks vary).<br>
+  <b>Caveats:</b> Stops/continuation from ~8 sessions per weekday (noisy — trust the pattern, not the exact tick). NY Thursday stays volatile (wide stop). London Tuesday confirmations fake out as often as they work. Rolling window shifts each refresh. Not trading advice.
+</footer>
+</div>
+<script>
+(function(){
+  var sel=document.getElementById('contract'),pt=document.getElementById('perTick'),
+      qc=document.getElementById('contracts'),auto=document.getElementById('autosize'),
+      note=document.getElementById('ctrlnote'),
+      dols=Array.prototype.slice.call(document.querySelectorAll('.dol[data-ticks]'));
+  function recompute(){
+    var perTick=parseFloat(pt.value)||0, gN=parseInt(qc.value)||1; if(gN<1) gN=1;
+    var isAuto=auto.checked; qc.disabled=isAuto; qc.style.opacity=isAuto?0.45:1;
+    dols.forEach(function(el){
+      var t=parseFloat(el.getAttribute('data-ticks'))||0,
+          rec=parseInt(el.getAttribute('data-rec'))||1,
+          n=isAuto?rec:gN;
+      el.textContent='$'+Math.round(t*perTick*n).toLocaleString()+(el.getAttribute('data-suffix')||'');
+    });
+    var name=sel.value==='1'?'MGC':(sel.value==='10'?'GC':'Custom');
+    note.textContent=name+' · $'+perTick.toFixed(2)+'/tick · '+(isAuto?'auto 2–3 micros':gN+' contract'+(gN!==1?'s':''));
+  }
+  sel.addEventListener('change',function(){
+    if(sel.value==='custom'){pt.readOnly=false;pt.focus();pt.select();}
+    else{pt.readOnly=true;pt.value=parseFloat(sel.value).toFixed(2);}
+    recompute();
+  });
+  pt.addEventListener('input',recompute);
+  qc.addEventListener('input',recompute);
+  auto.addEventListener('change',recompute);
+  recompute();
+})();
+</script>
+</body></html>
